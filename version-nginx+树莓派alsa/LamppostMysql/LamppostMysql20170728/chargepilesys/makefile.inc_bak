@@ -1,0 +1,7 @@
+#created by zhangwei on 2017-04-10
+
+INCLUDE_PATH=-I.  -I../chargepile -I../collector -I../parklock -I../../common/json -I../../common/cfg -I../../common/log -I../../common/db
+LIB_PATH=-L.  -L../chargepile -L../collector -L../parklock -L../../common/json -L../../common/cfg -L../../common/log -L../../common/db -L/usr/local/lib
+LIB=-lchargepile -lcollector -lparklock -lcJSON -llog -lconfig -lgdmysql -lfcgi -lpthread -lc -lm
+CC=gcc -m32
+ARCH=ar -rv

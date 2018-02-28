@@ -1,0 +1,4 @@
+---- FN_ONOFF_SWITCH Matches (3 in 2 files) ----
+Upserv.c (chargepilesys\serv):    {AFN_CONFIRM_DENY, FN_ONOFF_SWITCH, lamp_onoff_proc},
+Upserv.c (chargepilesys\serv):    {AFN_CONFIRM_DENY, FN_ONOFF_SWITCH, lamp_onoff_proc},
+Upserv.h (chargepilesys\serv):#define FN_ONOFF_SWITCH        20     // 控制主控开关F20

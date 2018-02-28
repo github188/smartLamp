@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "log.h"
+#include "global.h"
+#include "frame.h"
+#include "music_proc.h"
+
+int g_sockfd = -1;
+
+int g_iRetVal = 0;
+
+int g_serial_fd = 0; 
+
+int g_recv_msqid = -1;
+int g_send_msqid = -1;
+
+pthread_t g_recvtid = 0;
+pthread_t g_sendtid = 0;
+pthread_t g_aServTid[MAX_THREAD_COUNT] = { 0 };
+pthread_t g_eviromentid=0;
+
+//add by tianyu
+pthread_t g_io_thread = 0;
+int g_pipe[2] = {-1, -1};
+pthread_mutex_t g_socket_mutex;
+pthread_mutex_t g_music_mutex;
+pthread_mutex_t g_pipe_mutex;
+
+
+unsigned int g_uiServThreadNum = 4;
+
+const char g_strAudioPath[MAX_PATH_LEN + 1] = "/usr/local/arm/smartlamppost/audio/audio/";
+
+//char g_acServerIp[32] = "182.61.18.112";
+char g_acServerIp[32] = "192.168.10.212";
+unsigned short g_usServerPort = 9009;
+
+//char collector_id[MAX_ADDR_LEN + 1] = "12345678014";
+//char collector_id[MAX_ADDR_LEN + 1] = "12345678012";
+char collector_id[MAX_ADDR_LEN + 1] = "12345678016";
+//char collector_id[MAX_ADDR_LEN + 1] = "12345678018";
+
+
+unsigned int g_uiHeartbeatCycle = 10;
+
+unsigned int g_uiLoginCycle =10;
+unsigned int g_uiLoginSuccess =0; //0: login is not success; 1:login is success
+
+//add by tianyu
+unsigned int g_uiLoginNoAckCnt = 0;
+
+unsigned int g_uiHeartbeatNoAckCnt = 0;
+unsigned int g_EviromentSensorsOrNot=20;
+
+//char g_strCurrentSongName[MAX_FILENAME_LEN + 1] = {0}; // guichen define it. it is used in music_proc.c
+
+// 休眠函数(以ms为单位)
+int Sleep(int count)
+{
+    int             secs=0, msecs=0;
+    struct timeval  timeout,timeo;
+
+    if (count < 0)
+    {
+        return -1;
+    }
+	
+    if (count < 1000)
+    {
+        timeout.tv_sec = 0;
+        timeout.tv_usec = count * 1000;
+    }
+    else
+    {
+        timeout.tv_sec = count / 1000;  
+        timeout.tv_usec = (count % 1000) * 1000;
+    }
+    select(0, NULL, NULL, NULL, &timeout);
+    //nanosleep(&timeout,&timeo);
+    return 0;
+}
+
+void dumpInfo(unsigned char *info, int length)
+{	
+    char log_str_buf[2048] = {0};	
+    int index = 0;	int j = 0;
+    char buffer[2048] = {0};	
+    memset(buffer, 0, 2048);
+    for (index = 0; index < length; index++, j+=2)
+    {		
+        sprintf(&buffer[j],"%02x",info[index]);	
+    }	
+    snprintf(log_str_buf, sizeof(log_str_buf)-1, "dump info length = %d, %s\n", length, buffer);	
+    WRITELOG(LOG_INFO, log_str_buf);
+}
+
+

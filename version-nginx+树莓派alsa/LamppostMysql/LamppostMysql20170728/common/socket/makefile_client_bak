@@ -1,0 +1,17 @@
+#created by zhangwei on 2017-04-10
+
+EXEC=netclient_test
+OBJECTS=netclient_test.o netinf.o
+INCLUDE_PATH=-I.
+CC = gcc -m32
+CFLAGS=-g
+
+all:$(EXEC)
+$(EXEC):$(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(EXEC)
+$(OBJECTS):%.o:%.c
+	$(CC) -c $< -o $@ $(INCLUDE_PATH)
+
+clean:
+	rm *.o
+	rm $(EXEC)

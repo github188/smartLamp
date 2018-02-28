@@ -1,0 +1,87 @@
+---- szCollectorID Matches (0 in 0 files) ----
+---- select: No such file or directory Matches (0 in 0 files) ----
+---- select Matches (10 in 3 files) ----
+Global.c (global):    select(0, NULL, NULL, NULL, &timeout);
+Lockandsensors.c (carlockandenvparams):    ret = select(fd+1, &fs_read, NULL, NULL, &tv_timeout); 
+Lockandsensors.c (carlockandenvparams):        perror("select"); 
+Netinf.c (common\socket):    ret = select(maxfds + 1, NULL, &writefds, NULL, &tival);
+Netinf.c (common\socket):            snprintf(szLogInfo, sizeof(szLogInfo) - 1, "Send socket:%d select() error! return:%d, errno=%d, errmsg[%s]", sock, ret, errno, strerror(errno));
+Netinf.c (common\socket):            snprintf(szLogInfo, sizeof(szLogInfo) - 1, "Send socket:%d select timeout(%d)!", sock, timeout);
+Netinf.c (common\socket):        ret = select(maxfds + 1, &readfds, NULL, NULL, NULL);
+Netinf.c (common\socket):        ret = select(maxfds + 1, &readfds, NULL, NULL, &tival);
+Netinf.c (common\socket):            snprintf(szLogInfo, sizeof(szLogInfo) - 1, "Recv socket:%d select() error! return:%d, errno=%d, errmsg[%s]", sock, ret, errno, strerror(errno));
+Netinf.c (common\socket):            snprintf(szLogInfo, sizeof(szLogInfo) - 1, "Recv socket:%d select timeout(%d)!", sock, timeout);
+---- select: Matches (0 in 0 files) ----
+---- uart_send Matches (25 in 2 files) ----
+Lockandsensors.c (carlockandenvparams):int uart_send(int fd, char *data, int datalen) 
+Lockandsensors.c (carlockandenvparams):    printf("uart_send:len=%d,datalen=%d\n", len, datalen); 
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, szOpen, sizeof(szOpen));
+Lockandsensors.c (carlockandenvparams):        printf("OpenLock: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, szClose, sizeof(szClose));
+Lockandsensors.c (carlockandenvparams):        printf("CloseLock: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, szStatus, sizeof(szStatus));
+Lockandsensors.c (carlockandenvparams):        printf("GetLockStatus: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, szClose, sizeof(szClose));
+Lockandsensors.c (carlockandenvparams):        printf("CloseBuzzer: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):        iDataLen = uart_send(g_serial_fd, szClose, sizeof(szClose));
+Lockandsensors.c (carlockandenvparams):            printf("OpenBuzzer: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, atmoTemp, sizeof(atmoTemp));
+Lockandsensors.c (carlockandenvparams):        printf("AtmoTemp: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, Humidity, sizeof(Humidity));
+Lockandsensors.c (carlockandenvparams):        printf("Humidity: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, IlluminationH, sizeof(IlluminationH));
+Lockandsensors.c (carlockandenvparams):        printf("IlluminationH: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, IlluminationL, sizeof(IlluminationL));
+Lockandsensors.c (carlockandenvparams):        printf("IlluminationL: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, WindSpeed, sizeof(WindSpeed));
+Lockandsensors.c (carlockandenvparams):        printf("WindSpeed: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):    iDataLen = uart_send(g_serial_fd, WindDirection, sizeof(WindDirection));
+Lockandsensors.c (carlockandenvparams):        printf("WindDirection: exec uart_send failed!\n");
+Lockandsensors.h (carlockandenvparams):int uart_send(int fd, char *data, int datalen);   // 串口发送数据
+----  CloseBuzzer: exec uart_recv failed! Matches (0 in 0 files) ----
+---- CloseBuzzer Matches (11 in 4 files) ----
+Link_chk.c (linkcheck):        CloseBuzzer();
+Lockandsensors.c (carlockandenvparams):int CloseBuzzer(void) 
+Lockandsensors.c (carlockandenvparams):        printf("CloseBuzzer: exec init_serial failed!\n");
+Lockandsensors.c (carlockandenvparams):        printf("CloseBuzzer: exec uart_send failed!\n");
+Lockandsensors.c (carlockandenvparams):        printf("CloseBuzzer: exec uart_recv failed!\n");
+Lockandsensors.c (carlockandenvparams):    printf("CloseBuzzer: received len=%d\n", iDataLen); 
+Lockandsensors.c (carlockandenvparams):        printf("CloseBuzzer: Close buzzer success!\n");
+Lockandsensors.c (carlockandenvparams):        printf("CloseBuzzer: Close buzzer failed!\n"); 
+Lockandsensors.c (carlockandenvparams):	    printf("CloseBuzzer: received data is wrong!\n"); 
+Lockandsensors.h (carlockandenvparams):int CloseBuzzer(void);//关蜂鸣器
+Serv.c (serv):   CloseBuzzer();
+---- _t_get_all_envirparam_ack Matches (24 in 4 files) ----
+Envparams_proc.c (env_params):	Get_All(&_t_get_all_envirparam_ack);
+Envparams_proc.c (env_params):	buf->len = sizeof(_t_get_all_envirparam_ack);
+Envparams_proc.c (env_params):	memcpy(buf->buf, &_t_get_all_envirparam_ack,buf->len);
+Link_chk.c (linkcheck):        Get_All(&_t_get_all_envirparam_ack);
+Link_chk.c (linkcheck):   //  frame.user_data.len= sizeof(_t_get_all_envirparam_ack);
+Link_chk.c (linkcheck):	//memcpy(frame.user_data.data, &_t_get_all_envirparam_ack,frame.user_data.len);
+Lockandsensors.c (carlockandenvparams):	//snprintf(_t_get_all_envirparam_ack.szWenduValue, sizeof(_t_get_all_envirparam_ack.szWenduValue) - 1, "%.1f", fTemperatureResult/10);
+Lockandsensors.c (carlockandenvparams):	//_t_get_all_envirparam_ack.retcode = -1;
+Lockandsensors.c (carlockandenvparams):	 //snprintf(_t_get_all_envirparam_ack.szShiDuVlaue, sizeof(_t_get_all_envirparam_ack.szShiDuVlaue) - 1, "%.1f", fHumidityResult/10);
+Lockandsensors.c (carlockandenvparams):	//_t_get_all_envirparam_ack.retcode = -1;
+Lockandsensors.c (carlockandenvparams):	 //snprintf(_t_get_all_envirparam_ack.szZhaoDuVlaue, sizeof(_t_get_all_envirparam_ack.szZhaoDuVlaue) - 1, "%d", iIlluminationResult);
+Lockandsensors.c (carlockandenvparams):	//_t_get_all_envirparam_ack.retcode = -1;
+Lockandsensors.c (carlockandenvparams):	// snprintf(_t_get_all_envirparam_ack.szFengXiangValue, sizeof(_t_get_all_envirparam_ack.szFengXiangValue) - 1, "%.1f", fWindDirectionResult/10);
+Lockandsensors.c (carlockandenvparams):	//_t_get_all_envirparam_ack.retcode = -1;
+Lockandsensors.c (carlockandenvparams):	 // snprintf(_t_get_all_envirparam_ack.szFengSuValue, sizeof(_t_get_all_envirparam_ack.szFengSuValue) - 1, "%.1f", fWindSpeedResult/10);
+Lockandsensors.c (carlockandenvparams):	//_t_get_all_envirparam_ack.retcode = -1;
+Lockandsensors.c (carlockandenvparams): 	_t_get_all_envirparam_ack.retcode = 0;
+Lockandsensors.c (carlockandenvparams):			Get_All(&_t_get_all_envirparam_ack);
+Lockandsensors.h (carlockandenvparams):t_get_all_envirparam_ack _t_get_all_envirparam_ack;
+---- collector_id Matches (11 in 6 files) ----
+Envparams_proc.c (env_params):    memcpy(frame->addr, collector_id, MAX_ADDR_LEN);
+Envparams_proc.c (env_params):     memcpy(frame->addr, collector_id, MAX_ADDR_LEN);
+Global.c (global):char collector_id[MAX_ADDR_LEN + 1] = "12345678014";
+Global.h (global):extern char collector_id[MAX_ADDR_LEN+1];
+Link_chk.c (linkcheck):	memcpy(frame.addr, collector_id, MAX_ADDR_LEN);
+Link_chk.c (linkcheck):	memcpy(frame.addr, collector_id, MAX_ADDR_LEN);
+Lock_proc.c (chargepile):    memcpy(frame->addr, collector_id, MAX_ADDR_LEN);
+Music_proc.c (music):    memcpy(frame->addr, collector_id, MAX_ADDR_LEN);
+Music_proc.c (music):    memcpy(tframe.addr, collector_id, MAX_ADDR_LEN);
+Music_proc.c (music):    memcpy(frame->addr, collector_id, MAX_ADDR_LEN);
+Music_proc.c (music):    memcpy(frame->addr, collector_id, MAX_ADDR_LEN);
+---- connect failed Matches (1 in 1 files) ----
+Netinf.c (common\socket):        snprintf(szLogInfo, sizeof(szLogInfo) - 1, "connect failed! errno=%d, errmsg[%s]", errno, strerror(errno));

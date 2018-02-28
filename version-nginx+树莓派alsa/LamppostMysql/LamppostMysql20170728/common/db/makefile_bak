@@ -1,0 +1,18 @@
+
+
+CC=gcc -m32
+ARCH=ar -rv
+#CYGWIN_MACRO=-D_CYGWIN
+OBJECTS=gdmysql.o
+
+all:libgdmysql.a
+
+libgdmysql.a:$(OBJECTS)
+	$(ARCH) libgdmysql.a $(OBJECTS)
+	rm *.o
+$(OBJECTS):%.o:%.c
+	$(CC) -c -I/usr/include/mysql  $< -o $@
+
+clean:
+	rm libgdmysql.a
+
